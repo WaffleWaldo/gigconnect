@@ -2,8 +2,12 @@ const getAllUsers = (req, res) => {
     res.send("all users")
 }
 
-const createUser = (req, res) => {
-    res.send("create user")
+const createUser = async (req, res) => {
+    try {
+        res.send("create user")
+    } catch (error) {
+        res.status(500).json({ error: error })
+    }
 }
 
 const getUser = (req, res) => {
