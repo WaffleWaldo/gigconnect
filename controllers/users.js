@@ -2,7 +2,7 @@ const User = require("../models/User")
 const asyncWrapper = require("../middleware/async")
 
 const getAllUsers = asyncWrapper(async (req, res) => {
-    const users = await User.find({})
+    const users = await User.find({}).select('-password')
     res.status(200).json({ users })
 })
 
