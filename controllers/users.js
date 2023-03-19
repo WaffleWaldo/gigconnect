@@ -1,14 +1,10 @@
 const User = require("../models/User")
+const asyncWrapper = require("../middleware/async")
 
-const getAllUsers = async (req, res) => {
-    try {
-        const users = await User.find({})
-        res.status(200).json({ users })
-    } catch (error) {
-        res.status(500).json({ error: error })
-    }
-   
-}
+const getAllUsers = asyncWrapper(async (req, res) => {
+    const users = await User.find({})
+    res.status(200).json({ users })
+})
 
 const createUser = async (req, res) => {
     try {
