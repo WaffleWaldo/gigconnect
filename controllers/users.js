@@ -4,6 +4,7 @@ const getAllUsers = (req, res) => {
     res.send("all users")
 }
 
+//testable on postman
 const createUser = async (req, res) => {
     try {
         const user = await User.create(req.body)
