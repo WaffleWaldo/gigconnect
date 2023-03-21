@@ -22,12 +22,17 @@ const getUser = asyncWrapper(async (req, res, next) => {
     res.status(200).json({ user })
 })
 
+const deleteUser = asyncWrapper(async (req, res, next) => {
+    const { id: userID } = req.params
+    const user = await User.findOneAndDelete({ _id: userID })
+    if (!user){
+        return next(createCustomError(`No user with id: ${userID}`, 404))
+    }
+    res.status(200).json({ user })
+})
+
 const updateUser = (req, res) => {
     res.send("update user info")
-}
-
-const deleteUser = (req, res) => {
-    res.send("delete user")
 }
 
 module.exports = { 

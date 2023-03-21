@@ -1,8 +1,8 @@
 require("dotenv").config()
-const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY)
 const express = require("express")
 const app = express()
 const users = require("./routes/users")
+const bookings = require("./routes/bookings")
 const connectDB = require("./db/connect")
 
 const port = 3000
@@ -13,6 +13,7 @@ app.use(express.json())
 
 //Routes
 app.use("/api/v1/users", users)
+app.use("/api/v1/bookings", bookings)
 
 
 const start = async () => {
