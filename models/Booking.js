@@ -18,27 +18,13 @@ const BookingSchema = new mongoose.Schema({
         }
     },
     location: {
-        type: String,
+        type: [String],
         required: true
     },
     isActive: {
         type: Boolean,
         default: true
     },
-    lister:{
-        type: mongoose.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
-    talent: {
-        //need parameter that only places user with talent role in this field
-        type: mongoose.Types.ObjectId,
-        ref: 'User',
-    },
-    eventDate: {
-        type: String,
-        required: true
-    }
 })
 
 module.exports = mongoose.model('Booking', BookingSchema)

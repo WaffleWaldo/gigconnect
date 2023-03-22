@@ -1,4 +1,4 @@
-const express = require(express)
+const express = require('express')
 const router = express.Router()
 
 const {
@@ -10,4 +10,6 @@ const {
 } = require("../controllers/bookings")
 
 router.route("/").get(getAllBookings).post(createBooking)
-router.route("/:id").get(getBooking).patch(updateBooking).delete(deleteBooking)
+router.route("/:id").get(getBooking).delete(deleteBooking)
+
+module.exports = router
