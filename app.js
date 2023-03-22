@@ -4,6 +4,8 @@ const app = express()
 const users = require("./routes/users")
 const bookings = require("./routes/bookings")
 const connectDB = require("./db/connect")
+const notFoundMiddleware = require('./middleware/not-found');
+const errorMiddleware = require('./middleware/error-handler');
 
 const port = 3000
 
@@ -15,6 +17,9 @@ app.use(express.json())
 app.use("/api/v1/users", users)
 app.use("/api/v1/bookings", bookings)
 
+//Custom error handlers
+app.use(notFoundMiddleware);
+app.use(errorMiddleware);
 
 const start = async () => {
     try {
