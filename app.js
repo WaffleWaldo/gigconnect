@@ -3,6 +3,7 @@ const express = require("express")
 const app = express()
 const users = require("./routes/users")
 const bookings = require("./routes/bookings")
+const auth = require("./routes/auth")
 const connectDB = require("./db/connect")
 const notFoundMiddleware = require('./middleware/not-found');
 const errorMiddleware = require('./middleware/error-handler');
@@ -14,6 +15,7 @@ app.use(express.static("public"))
 app.use(express.json())
 
 //Routes
+app.use("api/v1", auth)
 app.use("/api/v1/users", users)
 app.use("/api/v1/bookings", bookings)
 
