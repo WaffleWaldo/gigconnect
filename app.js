@@ -1,21 +1,37 @@
 require("dotenv").config()
+require('express-async-errors');
+
+//express
 const express = require("express")
 const app = express()
+
+//pakages
+const morgan = require('morgan')
+const cookieParser = require('cookie-parser')
+const fileUpload = require('express-fileupload')
+const rateLimiter = require('express-rate-limit')
+const helmet = require('helmet')
+const xss = require('xss-clean')
+const cors = require('cors')
+const mongoSanitize = require('express-mongo-sanitize')
+
+//routes
 const users = require("./routes/users")
 const bookings = require("./routes/bookings")
-const auth = require("./routes/auth")
+const authRoutes = require("./routes/auth")
 const connectDB = require("./db/connect")
-const notFoundMiddleware = require('./middleware/not-found');
-const errorMiddleware = require('./middleware/error-handler');
+
+//middleware
+const notFoundMiddleware = require('./middleware/not-found')
+const errorMiddleware = require('./middleware/error-handler')
 
 const port = 3000
 
-//Middleware
 app.use(express.static("public"))
 app.use(express.json())
 
 //Routes
-app.use("api/v1", auth)
+app.use("/api/v1/auth", authRoutes)
 app.use("/api/v1/users", users)
 app.use("/api/v1/bookings", bookings)
 
