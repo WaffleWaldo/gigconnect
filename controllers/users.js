@@ -3,14 +3,14 @@ const CustomError = require("../errors")
 
 
 const getAllUsers = async (req, res) => {
-    const users = await User.find({}).select('-password')
+    const users = await User.find({})
     res.status(200).json({ users })
 }
 
 
 const getUser = async (req, res) => {
     const { id: userID } = req.params
-    const user = await User.findOne({ _id: userID }).select('-password')
+    const user = await User.findOne({ _id: userID })
     if (!user){
         throw new CustomError.NotFoundError(`no user with id: ${req.params.id}`)
     }
