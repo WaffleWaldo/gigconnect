@@ -25,6 +25,11 @@ const UserSchema = new mongoose.Schema({
         type: String,
         enum: ['talent', 'planner'],
         required: [true, 'Please choose a role']
+    },
+    accountType: {
+        type: String,
+        enum: ['admin', 'user'],
+        default: 'user',
     }
 }, {timestamps: true})
 

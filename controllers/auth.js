@@ -11,11 +11,15 @@ const register = async (req, res) => {
         throw new CustomError.BadRequestError('Email already exists');
     }
 
+    const isFirstAccount = await User.countDocuments({}) === 0
+    const accountType = isFirstAccount ? 'admin' : 'user'
+
     const user = await User.create({
         username, 
         email, 
         password, 
-        role
+        role,
+        accountType
     })
 
     const tokenUser = createTokenUser(user)
